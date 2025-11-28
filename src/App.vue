@@ -14,7 +14,7 @@ async function fetchResources() {
   try {
     // 关键点：使用相对路径 /api/resources
     // Pages 代理将确保这个请求被转发到您的 ECS
-    const response = await axios.get('/api/resources'); 
+    const response = await axios.get('http://39.105.154.74:8080/api/resources'); 
     resources.value = response.data;
   } catch (err) {
     console.error("API Call Failed:", err);
