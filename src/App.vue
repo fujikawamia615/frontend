@@ -2,29 +2,29 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
-// ´æ´¢´Óºó¶Ë»ñÈ¡µÄ×ÊÔ´ÁĞ±í
+// å­˜å‚¨ä»åç«¯è·å–çš„èµ„æºåˆ—è¡¨
 const resources = ref([]);
 const loading = ref(true);
 const error = ref(null);
 
-// Òì²½º¯Êı£º´Óºó¶Ë»ñÈ¡Êı¾İ
+// å¼‚æ­¥å‡½æ•°ï¼šä»åç«¯è·å–æ•°æ®
 async function fetchResources() {
   loading.value = true;
   error.value = null;
   try {
-    // ¹Ø¼üµã£ºÊ¹ÓÃÏà¶ÔÂ·¾¶ /api/resources
-    // Pages ´úÀí½«È·±£Õâ¸öÇëÇó±»×ª·¢µ½ÄúµÄ ECS
+    // å…³é”®ç‚¹ï¼šä½¿ç”¨ç›¸å¯¹è·¯å¾„ /api/resources
+    // Pages ä»£ç†å°†ç¡®ä¿è¿™ä¸ªè¯·æ±‚è¢«è½¬å‘åˆ°æ‚¨çš„ ECS
     const response = await axios.get('/api/resources'); 
     resources.value = response.data;
   } catch (err) {
     console.error("API Call Failed:", err);
-    error.value = "ÎŞ·¨Á¬½Óµ½ºó¶Ë API£¬Çë¼ì²é Pages ´úÀíÅäÖÃºÍ ECS ×´Ì¬¡£";
+    error.value = "æ— æ³•è¿æ¥åˆ°åç«¯ APIï¼Œè¯·æ£€æŸ¥ Pages ä»£ç†é…ç½®å’Œ ECS çŠ¶æ€ã€‚";
   } finally {
     loading.value = false;
   }
 }
 
-// ×é¼ş¼ÓÔØÍê³ÉºóÁ¢¼´µ÷ÓÃ»ñÈ¡Êı¾İ
+// ç»„ä»¶åŠ è½½å®Œæˆåç«‹å³è°ƒç”¨è·å–æ•°æ®
 onMounted(() => {
   fetchResources();
 });
@@ -32,18 +32,18 @@ onMounted(() => {
 
 <template>
   <header>
-    <h1>×ÊÔ´Õ¾ÏîÄ¿</h1>
+    <h1>èµ„æºç«™é¡¹ç›®</h1>
   </header>
 
   <main>
-    <h2>×ÊÔ´ÁĞ±í</h2>
+    <h2>èµ„æºåˆ—è¡¨</h2>
     
     <div v-if="loading">
-      <p>ÕıÔÚ¼ÓÔØ×ÊÔ´...</p>
+      <p>æ­£åœ¨åŠ è½½èµ„æº...</p>
     </div>
 
     <div v-else-if="error">
-      <p style="color: red;">´íÎó: {{ error }}</p>
+      <p style="color: red;">é”™è¯¯: {{ error }}</p>
     </div>
 
     <div v-else>
@@ -51,16 +51,16 @@ onMounted(() => {
         <li v-for="resource in resources" :key="resource.id">
           <strong>{{ resource.name }}</strong> (ID: {{ resource.id }})
           <p>{{ resource.description }}</p>
-          <a :href="'/api/download/' + resource.fileKey">ÏÂÔØ ({{ resource.size }} bytes)</a>
+          <a :href="'/api/download/' + resource.fileKey">ä¸‹è½½ ({{ resource.size }} bytes)</a>
         </li>
       </ul>
-      <p v-else>ºó¶ËÎ´·µ»ØÈÎºÎ×ÊÔ´¡£</p>
+      <p v-else>åç«¯æœªè¿”å›ä»»ä½•èµ„æºã€‚</p>
     </div>
   </main>
 </template>
 
 <style scoped>
-/* ÑùÊ½±£³Ö¼ò½à£¬¿ÉÒÔ¸ù¾İĞèÒª×Ô¶¨Òå */
+/* æ ·å¼ä¿æŒç®€æ´ï¼Œå¯ä»¥æ ¹æ®éœ€è¦è‡ªå®šä¹‰ */
 header {
   line-height: 1.5;
 }
