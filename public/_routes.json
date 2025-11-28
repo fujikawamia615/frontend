@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*"
+  ],
+  "exclude": [
+    "/"
+  ],
+  "route": {
+    "pattern": "/api/*",
+    "custom": {
+      "host": "http://39.105.154.74:8080"
+    }
+  }
+}
